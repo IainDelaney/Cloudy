@@ -16,7 +16,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 	@IBOutlet weak var DateLabel0: UILabel!
 	@IBOutlet weak var tempLabel0: UILabel!
 	@IBOutlet weak var forecastLabel0: UILabel!
-	@IBOutlet var dayLabels: [UILabel]!
 
 	var locationManager: CLLocationManager = CLLocationManager()
 	var startLocation: CLLocation!
@@ -84,12 +83,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	func updateUI() {
 		self.cityLabel.text = "Weather for \(self.weatherModel.city)"
-		self.forecastLabel0.text = self.weatherModel.days[0].description
 		let temperatureString = String(format: "%.0f", self.weatherModel.days[0].temperature)
-		self.tempLabel0.text = String("\(temperatureString)° C")
-		for (index,label) in self.dayLabels.enumerate() {
-			label.text =  self.weatherModel.days[index].dateString
-		}
 
 	}
 }

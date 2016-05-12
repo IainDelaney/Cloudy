@@ -24,57 +24,34 @@
                                     <constraint firstAttribute="width" constant="320" id="nK3-Cm-es2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23S-wt-4rs">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23S-wt-4rs" customClass="DayView" customModule="Cloudy" customModuleProvider="target">
                                 <rect key="frame" x="154" y="58" width="293" height="158"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x3l-jb-6mV" customClass="CloudView" customModule="Cloudy" customModuleProvider="target">
-                                        <rect key="frame" x="26" y="0.0" width="249" height="137"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXj-vt-0az">
-                                                <rect key="frame" x="43" y="63" width="162" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCX-NY-t0m">
-                                                <rect key="frame" x="92" y="86" width="64" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blJ-vo-oRb" customClass="CloudView" customModule="Cloudy" customModuleProvider="target">
+                                        <rect key="frame" x="26" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHg-4c-tgP">
-                                        <rect key="frame" x="90" y="137" width="120" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="293" id="46C-nO-EgH"/>
-                                    <constraint firstAttribute="height" constant="158" id="kML-BM-fnP"/>
+                                    <constraint firstAttribute="width" constant="293" id="0ri-No-u7d"/>
+                                    <constraint firstAttribute="height" constant="158" id="oYp-0s-GEg"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="23S-wt-4rs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3dj-b4-naJ"/>
-                            <constraint firstItem="23S-wt-4rs" firstAttribute="top" secondItem="KRY-O3-Rp9" secondAttribute="bottom" id="Pxv-9x-GyI"/>
                             <constraint firstItem="KRY-O3-Rp9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XtZ-4t-p4V"/>
+                            <constraint firstItem="23S-wt-4rs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="bmc-wU-gNB"/>
+                            <constraint firstItem="23S-wt-4rs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qSW-rH-OFT"/>
                             <constraint firstItem="KRY-O3-Rp9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="wo9-5t-hrI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cityLabel" destination="KRY-O3-Rp9" id="VuX-fv-elM"/>
-                        <outlet property="forecastLabel0" destination="mXj-vt-0az" id="2O6-ja-dD3"/>
-                        <outlet property="tempLabel0" destination="kCX-NY-t0m" id="DJA-gm-Vxt"/>
-                        <outletCollection property="dayLabels" destination="lHg-4c-tgP" collectionClass="NSMutableArray" id="uui-5h-z7e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
