@@ -31,7 +31,7 @@ class WeatherModel {
 			return NSDate()
 		}
 		let dateComponent = NSDateComponents()
-		dateComponent.day = 1
+		dateComponent.day = days
 		let calendar = NSCalendar.currentCalendar()
 		return calendar.dateByAddingComponents(dateComponent, toDate: NSDate(), options: NSCalendarOptions.WrapComponents )!
 	}
