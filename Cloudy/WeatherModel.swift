@@ -11,12 +11,13 @@ import Foundation
 struct DailyWeather {
 	var temperature: Double = 0.0
 	var description: String = ""
-    var todayDate: NSDate = NSDate()
+    var dateString: String = ""
 }
 
 class WeatherModel {
 	var city:String = ""
 	var days:[DailyWeather] = []
+	let dateFormatter = NSDateFormatter()
 
 	func parseCity(response:[String: AnyObject]) {
 		if let city = response["city"] as? [String: AnyObject] {
@@ -26,14 +27,20 @@ class WeatherModel {
 		}
 	}
 
-	func dateFromToday(days:Int) -> NSDate {
-		if days == 0 {
-			return NSDate()
-		}
+	func dateFromToday(days:Int) -> String {
 		let dateComponent = NSDateComponents()
 		dateComponent.day = days
 		let calendar = NSCalendar.currentCalendar()
-		return calendar.dateByAddingComponents(dateComponent, toDate: NSDate(), options: NSCalendarOptions.WrapComponents )!
+
+		let date = calendar.dateByAddingComponents(dateComponent, toDate: NSDate(), options: NSCalendarOptions.WrapComponents )!
+		switch days {
+		case 0,1:
+			dateFormatter.dateStyle = .ShortStyle
+			dateFormatter.doesRelativeDateFormatting = true
+		default:
+			dateFormatter.dateFormat = "EEEE"
+		}
+		return dateFormatter.stringFromDate(date)
 	}
 
 	func parseData(data:NSData?) {
@@ -56,7 +63,7 @@ class WeatherModel {
 								newDay.description = weather["description"] as! String
 							}
 						}
-						newDay.todayDate = dateFromToday(index)
+						newDay.dateString = dateFromToday(index)
 						days.append(newDay)
 					}
 				}else{
