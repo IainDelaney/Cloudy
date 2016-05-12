@@ -61,68 +61,12 @@
                                     <constraint firstAttribute="height" constant="158" id="kML-BM-fnP"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-Ph-xPd" userLabel="Label">
-                                <rect key="frame" x="240" y="277" width="120" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="EnY-Wv-gFM"/>
-                                    <constraint firstAttribute="width" constant="120" id="lUf-SJ-2iT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhx-BD-dCd" userLabel="Label">
-                                <rect key="frame" x="240" y="341" width="120" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="GJw-TI-b3J"/>
-                                    <constraint firstAttribute="height" constant="21" id="TMX-BI-gTN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0q-rV-v6k" userLabel="Label">
-                                <rect key="frame" x="240" y="248" width="120" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="T8g-2r-U4n"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="p6c-jg-ouZ"/>
-                                    <constraint firstAttribute="width" constant="120" id="qB0-UL-YWZ"/>
-                                    <constraint firstAttribute="height" constant="21" id="vE7-AN-2PW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="p6c-jg-ouZ"/>
-                                        <exclude reference="qB0-UL-YWZ"/>
-                                    </mask>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nm-SG-DT5" userLabel="Label">
-                                <rect key="frame" x="240" y="306" width="120" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="Kxs-qE-1cj"/>
-                                    <constraint firstAttribute="height" constant="21" id="YJE-p8-mfe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9nm-SG-DT5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="286" id="0Kg-5L-iqW"/>
                             <constraint firstItem="23S-wt-4rs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3dj-b4-naJ"/>
-                            <constraint firstItem="O0q-rV-v6k" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BZG-qj-Uwu"/>
                             <constraint firstItem="23S-wt-4rs" firstAttribute="top" secondItem="KRY-O3-Rp9" secondAttribute="bottom" id="Pxv-9x-GyI"/>
                             <constraint firstItem="KRY-O3-Rp9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XtZ-4t-p4V"/>
-                            <constraint firstItem="9nm-SG-DT5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="afN-Ah-SHv"/>
-                            <constraint firstItem="O0q-rV-v6k" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="228" id="gl8-MD-Gn9"/>
-                            <constraint firstItem="bhx-BD-dCd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hUq-eE-Krs"/>
-                            <constraint firstItem="bp1-Ph-xPd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="257" id="rl1-bu-bVG"/>
-                            <constraint firstItem="bhx-BD-dCd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="321" id="sao-tV-lU4"/>
-                            <constraint firstItem="bp1-Ph-xPd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t0p-fi-hU4"/>
                             <constraint firstItem="KRY-O3-Rp9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="wo9-5t-hrI"/>
                         </constraints>
                     </view>
@@ -131,10 +75,6 @@
                         <outlet property="forecastLabel0" destination="mXj-vt-0az" id="2O6-ja-dD3"/>
                         <outlet property="tempLabel0" destination="kCX-NY-t0m" id="DJA-gm-Vxt"/>
                         <outletCollection property="dayLabels" destination="lHg-4c-tgP" collectionClass="NSMutableArray" id="uui-5h-z7e"/>
-                        <outletCollection property="dayLabels" destination="O0q-rV-v6k" collectionClass="NSMutableArray" id="gn3-4N-4Ir"/>
-                        <outletCollection property="dayLabels" destination="bp1-Ph-xPd" collectionClass="NSMutableArray" id="eHb-jr-K5T"/>
-                        <outletCollection property="dayLabels" destination="9nm-SG-DT5" collectionClass="NSMutableArray" id="71f-0A-Zlz"/>
-                        <outletCollection property="dayLabels" destination="bhx-BD-dCd" collectionClass="NSMutableArray" id="OJE-Pv-dgw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
