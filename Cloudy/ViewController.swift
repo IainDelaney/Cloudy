@@ -11,6 +11,7 @@ import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
+	@IBOutlet weak var cityLabel: UILabel!
 	var locationManager: CLLocationManager = CLLocationManager()
 	var startLocation: CLLocation!
 
@@ -61,6 +62,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 			} else if let httpResponse = response as? NSHTTPURLResponse {
 				if httpResponse.statusCode == 200 {
 					self.weatherModel.parseData(data!)
+					dispatch_async(dispatch_get_main_queue()) {
+						self.updateUI()
+					}
 				}
 			}
 		}
@@ -70,6 +74,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
 		print("Location Error")
+	}
+
+	func updateUI() {
+		self.cityLabel.text = "Weather for \(self.weatherModel.city)"
 	}
 }
 
