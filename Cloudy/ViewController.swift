@@ -60,7 +60,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 				print(error.localizedDescription)
 			} else if let httpResponse = response as? NSHTTPURLResponse {
 				if httpResponse.statusCode == 200 {
-					weatherModel.parseData(data)
+					self.weatherModel.parseData(data!)
 				}
 			}
 		}
@@ -70,44 +70,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
 		print("Location Error")
-
 	}
-
-	func parseWeatherData(data: NSData?) {
-		do {
-			if let data = data, response = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions(rawValue:0)) as? [String: AnyObject] {
-
-				// Get the results array
-				if let city: AnyObject = response["city"] {
-					print(city["name"])
-				} else {
-					print("City not found in dictionary")
-				}
-				if let list: AnyObject = response["list"] {
-					for day in list as! [AnyObject] {
-						if let temp:AnyObject = day["temp"] {
-							print(temp["day"])
-						}
-						if let tempArray:AnyObject = day["weather"] {
-							let weatherArray = tempArray as! [AnyObject]
-							if let weather:AnyObject = weatherArray[0] {
-								print(weather["description"])
-								print(weather["icon"])
-							}
-						}
-
-					}
-				}else{
-					print("List not found in dictionary")
-				}
-			} else {
-				print("JSON Error")
-			}
-		} catch let error as NSError {
-			print("Error parsing results: \(error.localizedDescription)")
-		}
-
-	}
-
 }
 
