@@ -19,8 +19,8 @@ class WeatherModel {
 	var days:[DailyWeather] = []
 
 	func parseCity(response:[String: AnyObject]) {
-		if let city:String = response["city"] as? String {
-			self.city = city
+		if let city = response["city"] as? [String: AnyObject] {
+			self.city = city["name"] as! String
 		}else{
 			self.city = "Unknown City"
 		}
