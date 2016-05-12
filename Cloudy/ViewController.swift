@@ -13,10 +13,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	@IBOutlet weak var cityLabel: UILabel!
 
-	@IBOutlet weak var DateLabel0: UILabel!
-	@IBOutlet weak var tempLabel0: UILabel!
-	@IBOutlet weak var forecastLabel0: UILabel!
+	@IBOutlet var weatherDays: [UIView]!
+    
 
+    
 	var locationManager: CLLocationManager = CLLocationManager()
 	var startLocation: CLLocation!
 
@@ -30,7 +30,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+        
 		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
@@ -83,7 +83,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	func updateUI() {
 		self.cityLabel.text = "Weather for \(self.weatherModel.city)"
-		let temperatureString = String(format: "%.0f", self.weatherModel.days[0].temperature)
+		for (index, view) in weatherDays.enumerate() {
+			let dayView = UINib(nibName: "DayView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? DayView
+			dayView!.frame = view.bounds
+			dayView?.dayLabel.text = self.weatherModel.days[index].dateString
+			dayView?.forecastLabel.text = self.weatherModel.days[index].description
+			let temperatureString = String(format: "%.0f℃", self.weatherModel.days[index].temperature)
+			dayView?.temperatureLabel.text = temperatureString
+			view.addSubview(dayView!)
+
+		}
 
 	}
 }
