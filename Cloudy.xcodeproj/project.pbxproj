@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B9CC04121CE40AAB00E542EF /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC04111CE40AAB00E542EF /* CloudView.swift */; };
 		B9DDD3C51CE2849400E441A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDD3C41CE2849400E441A8 /* AppDelegate.swift */; };
 		B9DDD3C71CE2849400E441A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDD3C61CE2849400E441A8 /* ViewController.swift */; };
 		B9DDD3CA1CE2849400E441A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9DDD3C81CE2849400E441A8 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B9CC04111CE40AAB00E542EF /* CloudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		B9DDD3C11CE2849300E441A8 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9DDD3C41CE2849400E441A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9DDD3C61CE2849400E441A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		B9DDD3C31CE2849400E441A8 /* Cloudy */ = {
 			isa = PBXGroup;
 			children = (
+				B9CC04111CE40AAB00E542EF /* CloudView.swift */,
 				B9DDD3C41CE2849400E441A8 /* AppDelegate.swift */,
 				B9DDD3C61CE2849400E441A8 /* ViewController.swift */,
 				B9DDD3C81CE2849400E441A8 /* Main.storyboard */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9CC04121CE40AAB00E542EF /* CloudView.swift in Sources */,
 				B9DDD3C71CE2849400E441A8 /* ViewController.swift in Sources */,
 				B9F34BA21CE2D587008303C3 /* WeatherModel.swift in Sources */,
 				B9DDD3C51CE2849400E441A8 /* AppDelegate.swift in Sources */,
