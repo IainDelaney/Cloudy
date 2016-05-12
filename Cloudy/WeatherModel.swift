@@ -9,46 +9,59 @@
 import Foundation
 
 struct DailyWeather {
-	var temperature: Double
-	var description: String
-	var icon: String
-    var todayDate: NSDate
+	var temperature: Double = 0.0
+	var description: String = ""
+    var todayDate: NSDate = NSDate()
 }
 
 class WeatherModel {
-	var city:String
-	var days:[DailyWeather]
+	var city:String = ""
+	var days:[DailyWeather] = []
 
-	func parseData(data:NSData) {
+	func parseCity(response:[String: AnyObject]) {
+		if let city:String = response["city"] as? String {
+			self.city = city
+		}else{
+			self.city = "Unknown City"
+		}
+	}
+
+	func dateFromToday(days:Int) -> NSDate {
+		if days == 0 {
+			return NSDate()
+		}
+		let dateComponent = NSDateComponents()
+		dateComponent.day = 1
+		let calendar = NSCalendar.currentCalendar()
+		return calendar.dateByAddingComponents(dateComponent, toDate: NSDate(), options: NSCalendarOptions.WrapComponents )!
+	}
+
+	func parseData(data:NSData?) {
 		do {
-			if let data = data, response = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions(rawValue:0)) as? [String: AnyObject] {
+			guard let data = data else {
+				return
+			}
+			if let  response = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions(rawValue:0)) as? [String: AnyObject] {
 
-				// Get the results array
-				if let city: AnyObject = response["city"] {
-					self.city = (city["name"])
-				} else {
-					print("City not found in dictionary")
-				}
-				if let list: AnyObject = response["list"] {
-					for day in list as! [AnyObject] {
-						let newDay = DailyWeather()
-						if let temp:AnyObject = day["temp"] {
-							newDay.temperature = Double((temp["day"]))
+				self.parseCity(response)
+
+				if let list = response["list"] as? [[String:AnyObject]] {
+					for (index, element) in list.enumerate() {
+						var newDay = DailyWeather()
+						if let temp = element["temp"] as? [String:AnyObject] {
+							newDay.temperature = temp["day"] as! Double
 						}
-						if let tempArray:AnyObject = day["weather"] {
-							let weatherArray = tempArray as! [AnyObject]
-							if let weather:AnyObject = weatherArray[0] {
-								newDay.description = weather["description"]
-								newDay.icon = weather["icon"]
+						if let weatherArray:[AnyObject] = element["weather"] as? [AnyObject] {
+							if let weather = weatherArray[0] as? [String:AnyObject] {
+								newDay.description = weather["description"] as! String
 							}
 						}
+						newDay.todayDate = dateFromToday(index)
 						days.append(newDay)
 					}
 				}else{
 					print("List not found in dictionary")
 				}
-			} else {
-				print("JSON Error")
 			}
 		} catch let error as NSError {
 			print("Error parsing results: \(error.localizedDescription)")
