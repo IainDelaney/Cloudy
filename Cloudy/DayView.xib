@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DayView" customModule="Cloudy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="276" height="185"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9c-u8-NZS" customClass="CloudView" customModule="Cloudy" customModuleProvider="target">
+                    <rect key="frame" x="16" y="8" width="240" height="128"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8h-5R-vAc">
+                    <rect key="frame" x="61" y="61" width="150" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="0Le-0z-V4l"/>
+                        <constraint firstAttribute="height" constant="21" id="Orh-8y-GHL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wca-FL-6X6">
+                    <rect key="frame" x="115" y="93" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="7fY-UR-huz"/>
+                        <constraint firstAttribute="height" constant="21" id="EJe-oQ-Muu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cac-4X-P8j">
+                    <rect key="frame" x="8" y="144" width="256" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="9Dn-9g-RhJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="wca-FL-6X6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-2" id="1pH-qD-yIq"/>
+                <constraint firstAttribute="bottom" secondItem="cac-4X-P8j" secondAttribute="bottom" constant="20" id="1xM-VF-cly"/>
+                <constraint firstItem="k9c-u8-NZS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="6aP-Bg-pFW"/>
+                <constraint firstAttribute="trailing" secondItem="k9c-u8-NZS" secondAttribute="trailing" constant="20" id="H9z-5t-2B8"/>
+                <constraint firstItem="cac-4X-P8j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="NI9-SJ-WyD"/>
+                <constraint firstItem="X8h-5R-vAc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-2" id="OUU-73-DU3"/>
+                <constraint firstItem="wca-FL-6X6" firstAttribute="top" secondItem="X8h-5R-vAc" secondAttribute="bottom" constant="11" id="fdF-fw-0Fk"/>
+                <constraint firstItem="cac-4X-P8j" firstAttribute="top" secondItem="k9c-u8-NZS" secondAttribute="bottom" priority="750" constant="8" id="fga-qd-rHj"/>
+                <constraint firstItem="X8h-5R-vAc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="61" id="g0p-lf-wpE"/>
+                <constraint firstAttribute="trailing" secondItem="cac-4X-P8j" secondAttribute="trailing" constant="12" id="mFH-di-8y0"/>
+                <constraint firstItem="k9c-u8-NZS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="wUC-Zd-AHO"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dayLabel" destination="cac-4X-P8j" id="Kbk-JV-byY"/>
+                <outlet property="forecastLabel" destination="X8h-5R-vAc" id="0D0-Rr-kBB"/>
+                <outlet property="temperatureLabel" destination="wca-FL-6X6" id="JdJ-ht-yRh"/>
+            </connections>
+            <point key="canvasLocation" x="327" y="107.5"/>
+        </view>
+    </objects>
+</document>
