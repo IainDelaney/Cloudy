@@ -18,7 +18,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     
 	var locationManager: CLLocationManager = CLLocationManager()
-	var startLocation: CLLocation!
 
 	let defaultSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
 
@@ -28,30 +27,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
  
     var weatherModel = WeatherModel()
     
-	override func viewDidLoad() {
-		super.viewDidLoad()
-        
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
 		locationManager.startUpdatingLocation()
-		startLocation = nil
 	}
 
 	func locationManager(manager: CLLocationManager,
 	                     didUpdateLocations locations: [CLLocation])
 	{
-		let latestLocation: AnyObject = locations[locations.count - 1]
+		let latestLocation = locations[locations.count - 1]
 
 		let latitudeString = String(format: "%.4f",
 		                       latestLocation.coordinate.latitude)
 		let longitudeString = String(format: "%.4f",
 		                        latestLocation.coordinate.longitude)
-
-
-		if startLocation == nil {
-			startLocation = latestLocation as! CLLocation
-		}
 
 		locationManager.stopUpdatingLocation()
 
@@ -74,11 +67,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 			}
 		}
 		dataTask?.resume()
-
 	}
 
 	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-		print("Location Error")
+		let alertController = UIAlertController(title: "Location Error", message: "Error finding your location. Please make sure location services are enabled.", preferredStyle: .Alert)
+		let defaultAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+
+		alertController.addAction(defaultAction)
+		presentViewController(alertController, animated: true, completion: nil)
 	}
 
 	func updateUI() {
