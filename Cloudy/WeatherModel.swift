@@ -60,7 +60,7 @@ class WeatherModel {
 						}
 						if let weatherArray:[AnyObject] = element["weather"] as? [AnyObject] {
 							if let weather = weatherArray[0] as? [String:AnyObject] {
-								newDay.description = weather["description"] as! String
+								newDay.description = weather["main"] as! String
 							}
 						}
 						newDay.dateString = dateFromToday(index)
