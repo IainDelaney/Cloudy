@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B98F6FCB1CE4C386007960DD /* DayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B98F6FCA1CE4C386007960DD /* DayView.xib */; };
 		B9CC04121CE40AAB00E542EF /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC04111CE40AAB00E542EF /* CloudView.swift */; };
 		B9CC04141CE4262200E542EF /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CC04131CE4262200E542EF /* DayView.swift */; };
 		B9DDD3C51CE2849400E441A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DDD3C41CE2849400E441A8 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B98F6FCA1CE4C386007960DD /* DayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayView.xib; sourceTree = "<group>"; };
 		B9CC04111CE40AAB00E542EF /* CloudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		B9CC04131CE4262200E542EF /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		B9DDD3C11CE2849300E441A8 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,15 +62,16 @@
 		B9DDD3C31CE2849400E441A8 /* Cloudy */ = {
 			isa = PBXGroup;
 			children = (
-				B9CC04111CE40AAB00E542EF /* CloudView.swift */,
 				B9DDD3C41CE2849400E441A8 /* AppDelegate.swift */,
 				B9DDD3C61CE2849400E441A8 /* ViewController.swift */,
 				B9DDD3C81CE2849400E441A8 /* Main.storyboard */,
-				B9DDD3CB1CE2849400E441A8 /* Assets.xcassets */,
-				B9DDD3CD1CE2849400E441A8 /* LaunchScreen.storyboard */,
-				B9DDD3D01CE2849400E441A8 /* Info.plist */,
 				B9F34BA11CE2D587008303C3 /* WeatherModel.swift */,
 				B9CC04131CE4262200E542EF /* DayView.swift */,
+				B98F6FCA1CE4C386007960DD /* DayView.xib */,
+				B9CC04111CE40AAB00E542EF /* CloudView.swift */,
+				B9DDD3CD1CE2849400E441A8 /* LaunchScreen.storyboard */,
+				B9DDD3CB1CE2849400E441A8 /* Assets.xcassets */,
+				B9DDD3D01CE2849400E441A8 /* Info.plist */,
 			);
 			path = Cloudy;
 			sourceTree = "<group>";
@@ -105,7 +108,7 @@
 				TargetAttributes = {
 					B9DDD3C01CE2849300E441A8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = QGYJW3HZEQ;
+						DevelopmentTeam = AN62LPLFUS;
 					};
 				};
 			};
@@ -133,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9DDD3CF1CE2849400E441A8 /* LaunchScreen.storyboard in Resources */,
+				B98F6FCB1CE4C386007960DD /* DayView.xib in Resources */,
 				B9DDD3CC1CE2849400E441A8 /* Assets.xcassets in Resources */,
 				B9DDD3CA1CE2849400E441A8 /* Main.storyboard in Resources */,
 			);
