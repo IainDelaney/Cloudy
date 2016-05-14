@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRY-O3-Rp9">
-                                <rect key="frame" x="140" y="28" width="320" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="KRY-O3-Rp9">
+                                <rect key="frame" x="140" y="20" width="320" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="JjR-AX-hWH"/>
                                     <constraint firstAttribute="width" constant="320" id="nK3-Cm-es2"/>
@@ -27,36 +28,78 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23S-wt-4rs" customClass="DayView" customModule="Cloudy" customModuleProvider="target">
-                                <rect key="frame" x="154" y="58" width="293" height="158"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blJ-vo-oRb" customClass="CloudView" customModule="Cloudy" customModuleProvider="target">
-                                        <rect key="frame" x="26" y="0.0" width="240" height="128"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXc-q7-vDS">
+                                <rect key="frame" x="165" y="58" width="276" height="180"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="293" id="0ri-No-u7d"/>
-                                    <constraint firstAttribute="height" constant="158" id="oYp-0s-GEg"/>
+                                    <constraint firstAttribute="height" constant="180" id="c2e-dY-6HW"/>
+                                    <constraint firstAttribute="width" constant="276" id="egf-km-JyK"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZMv-cm-Mas">
+                                <rect key="frame" x="20" y="245" width="560" height="348"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="E9o-99-6fh">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="169"/>
+                                        <subviews>
+                                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="eAe-vx-nEp">
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="169"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Tf6-lY-45N">
+                                                <rect key="frame" x="285" y="0.0" width="275" height="169"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BL0-ZB-IqU">
+                                        <rect key="frame" x="0.0" y="179" width="560" height="169"/>
+                                        <subviews>
+                                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="SKR-6L-091">
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="169"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jVN-mX-4V1">
+                                                <rect key="frame" x="285" y="0.0" width="275" height="169"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="348" id="Iaa-vt-wmK"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Iaa-vt-wmK"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KRY-O3-Rp9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XtZ-4t-p4V"/>
-                            <constraint firstItem="23S-wt-4rs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="bmc-wU-gNB"/>
-                            <constraint firstItem="23S-wt-4rs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qSW-rH-OFT"/>
-                            <constraint firstItem="KRY-O3-Rp9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="wo9-5t-hrI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZMv-cm-Mas" secondAttribute="trailing" id="GfN-dp-alR"/>
+                            <constraint firstItem="ZMv-cm-Mas" firstAttribute="top" secondItem="zXc-q7-vDS" secondAttribute="bottom" constant="7" id="Lf8-2D-XwH"/>
+                            <constraint firstItem="zXc-q7-vDS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="3" id="WmB-qH-4lv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZMv-cm-Mas" secondAttribute="bottom" constant="7" id="abV-Hw-aR2"/>
+                            <constraint firstItem="KRY-O3-Rp9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f55-tz-Ohy"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="ZMv-cm-Mas" secondAttribute="leading" id="nYB-D6-8kW"/>
+                            <constraint firstItem="zXc-q7-vDS" firstAttribute="top" secondItem="KRY-O3-Rp9" secondAttribute="bottom" constant="8" id="vTF-qy-P0w"/>
+                            <constraint firstItem="KRY-O3-Rp9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="w1T-x3-ecM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cityLabel" destination="KRY-O3-Rp9" id="VuX-fv-elM"/>
+                        <outletCollection property="weatherDays" destination="zXc-q7-vDS" collectionClass="NSMutableArray" id="yzf-w6-WCY"/>
+                        <outletCollection property="weatherDays" destination="eAe-vx-nEp" collectionClass="NSMutableArray" id="aHb-ol-loc"/>
+                        <outletCollection property="weatherDays" destination="Tf6-lY-45N" collectionClass="NSMutableArray" id="XHX-Jh-N0q"/>
+                        <outletCollection property="weatherDays" destination="SKR-6L-091" collectionClass="NSMutableArray" id="CwL-FO-hR3"/>
+                        <outletCollection property="weatherDays" destination="jVN-mX-4V1" collectionClass="NSMutableArray" id="mvj-Mr-Swj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="435" y="318"/>
+            <point key="canvasLocation" x="327" y="291"/>
         </scene>
     </scenes>
 </document>
