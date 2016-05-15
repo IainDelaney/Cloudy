@@ -75,6 +75,9 @@
                                     </mask>
                                 </variation>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="T1q-3m-Nq2">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -83,13 +86,16 @@
                             <constraint firstItem="zXc-q7-vDS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="3" id="WmB-qH-4lv"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZMv-cm-Mas" secondAttribute="bottom" constant="7" id="abV-Hw-aR2"/>
                             <constraint firstItem="KRY-O3-Rp9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f55-tz-Ohy"/>
+                            <constraint firstItem="T1q-3m-Nq2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="k9b-F6-V0Q"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ZMv-cm-Mas" secondAttribute="leading" id="nYB-D6-8kW"/>
                             <constraint firstItem="zXc-q7-vDS" firstAttribute="top" secondItem="KRY-O3-Rp9" secondAttribute="bottom" constant="8" id="vTF-qy-P0w"/>
                             <constraint firstItem="KRY-O3-Rp9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="w1T-x3-ecM"/>
+                            <constraint firstItem="T1q-3m-Nq2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x5K-YT-Caa"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cityLabel" destination="KRY-O3-Rp9" id="VuX-fv-elM"/>
+                        <outlet property="spinner" destination="T1q-3m-Nq2" id="ZpR-R2-YTM"/>
                         <outletCollection property="weatherDays" destination="zXc-q7-vDS" collectionClass="NSMutableArray" id="yzf-w6-WCY"/>
                         <outletCollection property="weatherDays" destination="eAe-vx-nEp" collectionClass="NSMutableArray" id="aHb-ol-loc"/>
                         <outletCollection property="weatherDays" destination="Tf6-lY-45N" collectionClass="NSMutableArray" id="XHX-Jh-N0q"/>
