@@ -27,8 +27,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 	var APIKey = NSBundle.mainBundle().objectForInfoDictionaryKey("APIKey") as! String
  
     var weatherModel = WeatherModel()
-	var iconCache: [String: UIImage] = [:]
-
+	var iconNames = Set<String>()
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
@@ -102,7 +101,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 	}
 	
 	func loadIcon(iconName: String) {
-		if iconCache[iconName] != nil {
+		if iconNames.contains(iconName) {
 			return
 		}
 		let queue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)
@@ -112,9 +111,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 			if let imageURL = NSURL(string: iconPath) {
 				if let imageData = NSData(contentsOfURL: imageURL) {
 					if let image = UIImage(data: imageData) {
-						self.iconCache[iconName] = image
 						dispatch_async(dispatch_get_main_queue() ) {
-							self.updateIcon(iconName)
+							self.updateIcon(iconName,image:image)
 						}
 					}
 				}
@@ -123,11 +121,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	}
 
-	func updateIcon(iconName:String){
+	func updateIcon(iconName:String, image:UIImage){
 		for view in weatherDays {
 			if let dayView = view.subviews[0] as? DayView {
 				if dayView.iconName == iconName {
-					dayView.weatherIcon.image = iconCache[iconName]
+					dayView.weatherIcon.image = image
 				}
 			}
 		}
