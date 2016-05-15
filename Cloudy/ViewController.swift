@@ -15,6 +15,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	@IBOutlet var weatherDays: [UIView]!
     
+	@IBOutlet weak var spinner: UIActivityIndicatorView!
 
     
 	var locationManager: CLLocationManager = CLLocationManager()
@@ -26,10 +27,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 	var APIKey = NSBundle.mainBundle().objectForInfoDictionaryKey("APIKey") as! String
  
     var weatherModel = WeatherModel()
-    
+	var iconCache: [String: UIImage] = [:]
+
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		spinner.startAnimating()
 		locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
@@ -56,6 +59,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 			}
 			if let error = error {
+				dispatch_async(dispatch_get_main_queue() ) {
+					self.spinner.stopAnimating()
+				}
 				print(error.localizedDescription)
 			} else if let httpResponse = response as? NSHTTPURLResponse {
 				if httpResponse.statusCode == 200 {
@@ -87,13 +93,44 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 			dayView?.forecastLabel.text = dayData.description
 			let temperatureString = String(format: "%.0f℃", dayData.temperature)
 			dayView?.temperatureLabel.text = temperatureString
-			if let image = self.weatherModel.iconCache[dayData.icon] {
-				dayView?.weatherIcon.image = image
-			}
+			dayView?.iconName = dayData.icon
+			loadIcon(dayData.icon)
 			view.addSubview(dayView!)
 
 		}
+		spinner.stopAnimating()
+	}
+	
+	func loadIcon(iconName: String) {
+		if iconCache[iconName] != nil {
+			return
+		}
+		let queue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)
 
+		dispatch_async(queue) {
+			let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
+			if let imageURL = NSURL(string: iconPath) {
+				if let imageData = NSData(contentsOfURL: imageURL) {
+					if let image = UIImage(data: imageData) {
+						self.iconCache[iconName] = image
+						dispatch_async(dispatch_get_main_queue() ) {
+							self.updateIcon(iconName)
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	func updateIcon(iconName:String){
+		for view in weatherDays {
+			if let dayView = view.subviews[0] as? DayView {
+				if dayView.iconName == iconName {
+					dayView.weatherIcon.image = iconCache[iconName]
+				}
+			}
+		}
 	}
 }
 
