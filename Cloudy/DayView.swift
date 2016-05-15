@@ -9,7 +9,7 @@
 import UIKit
 
 class DayView: UIView {
-
+	var iconName: String?
 	@IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var forecastLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
