@@ -24,7 +24,7 @@
                     <rect key="frame" x="16" y="0.0" width="240" height="151"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X8h-5R-vAc">
-                            <rect key="frame" x="45" y="54" width="150" height="21"/>
+                            <rect key="frame" x="45" y="30" width="150" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="150" id="0Le-0z-V4l"/>
                                 <constraint firstAttribute="height" constant="21" id="Orh-8y-GHL"/>
@@ -34,7 +34,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wca-FL-6X6">
-                            <rect key="frame" x="99" y="76" width="42" height="21"/>
+                            <rect key="frame" x="99" y="101" width="42" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="42" id="7fY-UR-huz"/>
                                 <constraint firstAttribute="height" constant="21" id="EJe-oQ-Muu"/>
@@ -44,7 +44,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNE-KI-AFH">
-                            <rect key="frame" x="95" y="98" width="50" height="50"/>
+                            <rect key="frame" x="95" y="51" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="ST7-Rb-aQN"/>
                                 <constraint firstAttribute="height" constant="50" id="sMz-pS-cK2"/>
@@ -53,13 +53,19 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="wca-FL-6X6" firstAttribute="centerY" secondItem="k9c-u8-NZS" secondAttribute="centerY" constant="11" id="AIH-Cg-3SB"/>
-                        <constraint firstItem="X8h-5R-vAc" firstAttribute="centerY" secondItem="k9c-u8-NZS" secondAttribute="centerY" constant="-11" id="Arr-mN-NsR"/>
+                        <constraint firstItem="cNE-KI-AFH" firstAttribute="top" secondItem="X8h-5R-vAc" secondAttribute="bottom" id="EeG-56-wZT"/>
+                        <constraint firstItem="cNE-KI-AFH" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="KlV-em-EzS"/>
+                        <constraint firstItem="cNE-KI-AFH" firstAttribute="centerY" secondItem="k9c-u8-NZS" secondAttribute="centerY" id="NCI-bJ-zOR"/>
                         <constraint firstItem="X8h-5R-vAc" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="W6H-DH-lZf"/>
-                        <constraint firstItem="cNE-KI-AFH" firstAttribute="top" secondItem="wca-FL-6X6" secondAttribute="bottom" constant="1" id="YfT-CT-8Bh"/>
+                        <constraint firstItem="wca-FL-6X6" firstAttribute="top" secondItem="cNE-KI-AFH" secondAttribute="bottom" id="eJ8-kV-ej7"/>
                         <constraint firstItem="cNE-KI-AFH" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="qXW-YZ-y0r"/>
                         <constraint firstItem="wca-FL-6X6" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="uca-7g-Q6O"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="qXW-YZ-y0r"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
