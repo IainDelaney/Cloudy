@@ -19,7 +19,6 @@ struct DailyWeather {
 class WeatherModel {
 	var city:String = ""
 	var days:[DailyWeather] = []
-	var iconCache: [String: UIImage] = [:]
 
 	let dateFormatter = NSDateFormatter()
 
@@ -47,21 +46,6 @@ class WeatherModel {
 		return dateFormatter.stringFromDate(date)
 	}
 
-	func loadIcon(iconName: String) {
-		if iconCache[iconName] != nil {
-			return
-		}
-
-		let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
-		if let imageURL = NSURL(string: iconPath) {
-			if let imageData = NSData(contentsOfURL: imageURL) {
-				if let image = UIImage(data: imageData) {
-					iconCache[iconName] = image
-				}
-			}
-		}
-
-	}
 
 	func parseData(data:NSData?) {
 		do {
@@ -82,7 +66,6 @@ class WeatherModel {
 							if let weather = weatherArray[0] as? [String:AnyObject] {
 								newDay.description = weather["main"] as! String
 								newDay.icon = weather["icon"] as! String
-								loadIcon(newDay.icon)
 							}
 						}
 						newDay.dateString = dateFromToday(index)
