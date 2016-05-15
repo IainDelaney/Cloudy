@@ -31,6 +31,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		iconNames.removeAll()
 		spinner.startAnimating()
 		locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
 		locationManager.delegate = self
@@ -75,6 +76,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 	}
 
 	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+		self.spinner.stopAnimating()
 		let alertController = UIAlertController(title: "Location Error", message: "Error finding your location. Please make sure location services are enabled.", preferredStyle: .Alert)
 		let defaultAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
 
@@ -111,6 +113,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 			if let imageURL = NSURL(string: iconPath) {
 				if let imageData = NSData(contentsOfURL: imageURL) {
 					if let image = UIImage(data: imageData) {
+						self.iconNames.insert(iconName)
 						dispatch_async(dispatch_get_main_queue() ) {
 							self.updateIcon(iconName,image:image)
 						}
