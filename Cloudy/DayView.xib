@@ -43,12 +43,21 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNE-KI-AFH">
+                            <rect key="frame" x="95" y="98" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="ST7-Rb-aQN"/>
+                                <constraint firstAttribute="height" constant="50" id="sMz-pS-cK2"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="wca-FL-6X6" firstAttribute="centerY" secondItem="k9c-u8-NZS" secondAttribute="centerY" constant="11" id="AIH-Cg-3SB"/>
                         <constraint firstItem="X8h-5R-vAc" firstAttribute="centerY" secondItem="k9c-u8-NZS" secondAttribute="centerY" constant="-11" id="Arr-mN-NsR"/>
                         <constraint firstItem="X8h-5R-vAc" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="W6H-DH-lZf"/>
+                        <constraint firstItem="cNE-KI-AFH" firstAttribute="top" secondItem="wca-FL-6X6" secondAttribute="bottom" constant="1" id="YfT-CT-8Bh"/>
+                        <constraint firstItem="cNE-KI-AFH" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="qXW-YZ-y0r"/>
                         <constraint firstItem="wca-FL-6X6" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="uca-7g-Q6O"/>
                     </constraints>
                 </view>
@@ -70,6 +79,7 @@
                 <outlet property="dayLabel" destination="cac-4X-P8j" id="Kbk-JV-byY"/>
                 <outlet property="forecastLabel" destination="X8h-5R-vAc" id="0D0-Rr-kBB"/>
                 <outlet property="temperatureLabel" destination="wca-FL-6X6" id="JdJ-ht-yRh"/>
+                <outlet property="weatherIcon" destination="cNE-KI-AFH" id="fD7-cx-YFl"/>
             </connections>
             <point key="canvasLocation" x="327" y="107.5"/>
         </view>

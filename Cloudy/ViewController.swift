@@ -82,10 +82,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 		for (index, view) in weatherDays.enumerate() {
 			let dayView = UINib(nibName: "DayView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? DayView
 			dayView!.frame = view.bounds
-			dayView?.dayLabel.text = self.weatherModel.days[index].dateString
-			dayView?.forecastLabel.text = self.weatherModel.days[index].description
-			let temperatureString = String(format: "%.0f℃", self.weatherModel.days[index].temperature)
+			let dayData = self.weatherModel.days[index]
+			dayView?.dayLabel.text = dayData.dateString
+			dayView?.forecastLabel.text = dayData.description
+			let temperatureString = String(format: "%.0f℃", dayData.temperature)
 			dayView?.temperatureLabel.text = temperatureString
+			if let image = self.weatherModel.iconCache[dayData.icon] {
+				dayView?.weatherIcon.image = image
+			}
 			view.addSubview(dayView!)
 
 		}

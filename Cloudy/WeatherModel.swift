@@ -7,16 +7,20 @@
 //
 
 import Foundation
+import UIKit
 
 struct DailyWeather {
 	var temperature: Double = 0.0
 	var description: String = ""
     var dateString: String = ""
+	var icon: String = ""
 }
 
 class WeatherModel {
 	var city:String = ""
 	var days:[DailyWeather] = []
+	var iconCache: [String: UIImage] = [:]
+
 	let dateFormatter = NSDateFormatter()
 
 	func parseCity(response:[String: AnyObject]) {
@@ -43,6 +47,22 @@ class WeatherModel {
 		return dateFormatter.stringFromDate(date)
 	}
 
+	func loadIcon(iconName: String) {
+		if iconCache[iconName] != nil {
+			return
+		}
+
+		let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
+		if let imageURL = NSURL(string: iconPath) {
+			if let imageData = NSData(contentsOfURL: imageURL) {
+				if let image = UIImage(data: imageData) {
+					iconCache[iconName] = image
+				}
+			}
+		}
+
+	}
+
 	func parseData(data:NSData?) {
 		do {
 			guard let data = data else {
@@ -61,6 +81,8 @@ class WeatherModel {
 						if let weatherArray:[AnyObject] = element["weather"] as? [AnyObject] {
 							if let weather = weatherArray[0] as? [String:AnyObject] {
 								newDay.description = weather["main"] as! String
+								newDay.icon = weather["icon"] as! String
+								loadIcon(newDay.icon)
 							}
 						}
 						newDay.dateString = dateFromToday(index)
