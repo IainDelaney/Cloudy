@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 
 	@IBOutlet weak var cityLabel: UILabel!
 
@@ -29,16 +29,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var weatherModel = WeatherModel()
 	var iconNames = Set<String>()
 
-	override func viewWillAppear(animated: Bool) {
-		super.viewWillAppear(animated)
-		iconNames.removeAll()
-		spinner.startAnimating()
-		locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-		locationManager.delegate = self
-		locationManager.requestWhenInUseAuthorization()
-		locationManager.startUpdatingLocation()
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+        startUI()
 	}
 
+    func startUI() {
+        iconNames.removeAll()
+        spinner.startAnimating()
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+    }
 	func locationManager(manager: CLLocationManager,
 	                     didUpdateLocations locations: [CLLocation])
 	{
@@ -95,37 +99,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 			let temperatureString = String(format: "%.0f℃", dayData.temperature)
 			dayView?.temperatureLabel.text = temperatureString
 			dayView?.iconName = dayData.icon
-			loadIcon(dayData.icon)
+			self.iconNames.insert(dayData.icon)
 			view.addSubview(dayView!)
-
 		}
+		loadIcons()
 		spinner.stopAnimating()
 	}
 	
-	func loadIcon(iconName: String) {
-		if iconNames.contains(iconName) {
-			return
-		}
-		let queue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)
+	func loadIcons() {
+		let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
-		dispatch_async(queue) {
-			let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
-			if let imageURL = NSURL(string: iconPath) {
-				if let imageData = NSData(contentsOfURL: imageURL) {
+		for iconName in self.iconNames {
+			dispatch_async(queue) {
+				let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
+				let imageURL = NSURL(string: iconPath)
+				if let imageData = NSData(contentsOfURL: imageURL!) {
 					if let image = UIImage(data: imageData) {
-						self.iconNames.insert(iconName)
 						dispatch_async(dispatch_get_main_queue() ) {
 							self.updateIcon(iconName,image:image)
 						}
 					}
 				}
-			}
+		}
 		}
 
 	}
 
 	func updateIcon(iconName:String, image:UIImage){
-		for view in weatherDays {
+		for view in self.weatherDays {
 			if let dayView = view.subviews[0] as? DayView {
 				if dayView.iconName == iconName {
 					dayView.weatherIcon.image = image
