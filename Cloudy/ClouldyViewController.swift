@@ -125,10 +125,13 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
             let imageURL = NSURL(string: iconPath)
             defaultSession.dataTaskWithURL(imageURL!, completionHandler: {
                 data,response, error in
-                if error != nil {
-                    print(error)
-                    return
-                }
+				if let error = error {
+					dispatch_async(dispatch_get_main_queue() ) {
+						self.spinner.stopAnimating()
+					}
+					print(error.localizedDescription)
+					return
+				}
                 guard let data = data else {
 					print("no data")
                     return
