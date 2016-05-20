@@ -29,31 +29,45 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
     var weatherModel = WeatherModel()
 	var iconNames = Set<String>()
 
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
-        startUI()
+	var haveLocation = false
+
+	override func viewDidLoad() {
+		for view in weatherDays {
+			let dayView = UINib(nibName: "DayView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? DayView
+			dayView!.frame = view.bounds
+			view.addSubview(dayView!)
+		}
 	}
 
-    func startUI() {
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		startUI()
+	}
+
+	func startUI() {
+		haveLocation = false
         iconNames.removeAll()
         spinner.startAnimating()
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
+		locationManager.requestLocation()
+
     }
 	func locationManager(manager: CLLocationManager,
 	                     didUpdateLocations locations: [CLLocation])
 	{
+		if haveLocation {
+			return
+		}
+		haveLocation = true
 		let latestLocation = locations[locations.count - 1]
 
 		let latitudeString = String(format: "%.4f",
 		                       latestLocation.coordinate.latitude)
 		let longitudeString = String(format: "%.4f",
 		                        latestLocation.coordinate.longitude)
-
-		locationManager.stopUpdatingLocation()
 
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		let url = NSURL(string: "http://api.openweathermap.org/data/2.5/forecast/daily?lat=\(latitudeString)&lon=\(longitudeString)&mode=json&units=metric&cnt=5&APPID=\(APIKey)")
@@ -91,38 +105,42 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 	func updateUI() {
 		self.cityLabel.text = "Weather for \(self.weatherModel.city)"
 		for (index, view) in weatherDays.enumerate() {
-			let dayView = UINib(nibName: "DayView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? DayView
-			dayView!.frame = view.bounds
+			let dayView = view.subviews[0] as? DayView
 			let dayData = self.weatherModel.days[index]
+			print(dayData)
 			dayView?.dayLabel.text = dayData.dateString
 			dayView?.forecastLabel.text = dayData.description
 			let temperatureString = String(format: "%.0f℃", dayData.temperature)
 			dayView?.temperatureLabel.text = temperatureString
 			dayView?.iconName = dayData.icon
 			self.iconNames.insert(dayData.icon)
-			view.addSubview(dayView!)
 		}
-		loadIcons()
 		spinner.stopAnimating()
+		loadIcons()
 	}
 	
 	func loadIcons() {
-		let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 		for iconName in self.iconNames {
-			dispatch_async(queue) {
-				let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
-				let imageURL = NSURL(string: iconPath)
-				if let imageData = NSData(contentsOfURL: imageURL!) {
-					if let image = UIImage(data: imageData) {
-						dispatch_async(dispatch_get_main_queue() ) {
-							self.updateIcon(iconName,image:image)
-						}
-					}
-				}
-		}
-		}
-
+            let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
+            let imageURL = NSURL(string: iconPath)
+            defaultSession.dataTaskWithURL(imageURL!, completionHandler: {
+                data,response, error in
+                if error != nil {
+                    print(error)
+                    return
+                }
+                guard let data = data else {
+					print("no data")
+                    return
+                }
+                if let image = UIImage(data: data) {
+                    dispatch_async(dispatch_get_main_queue() ) {
+                        self.updateIcon(iconName,image:image)
+                    }
+                }
+            }).resume()
+        }
 	}
 
 	func updateIcon(iconName:String, image:UIImage){
