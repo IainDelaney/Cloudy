@@ -72,7 +72,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		let url = NSURL(string: "http://api.openweathermap.org/data/2.5/forecast/daily?lat=\(latitudeString)&lon=\(longitudeString)&mode=json&units=metric&cnt=5&APPID=\(APIKey)")
 
-		dataTask = defaultSession.dataTaskWithURL(url!) { data, response, error in
+		defaultSession.dataTaskWithURL(url!, completionHandler: { data, response, error in
 			dispatch_async(dispatch_get_main_queue()) {
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 			}
@@ -89,8 +89,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 					}
 				}
 			}
-		}
-		dataTask?.resume()
+		}).resume()
 	}
 
 	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
