@@ -85,7 +85,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 				if httpResponse.statusCode == 200 {
 					self.weatherModel.parseData(data!)
 					dispatch_async(dispatch_get_main_queue()) {
-						self.updateUI()
+                        self.updateUI()
 					}
 				}
 			}
@@ -106,7 +106,6 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 		for (index, view) in weatherDays.enumerate() {
 			let dayView = view.subviews[0] as? DayView
 			let dayData = self.weatherModel.days[index]
-			print(dayData)
 			dayView?.dayLabel.text = dayData.dateString
 			dayView?.forecastLabel.text = dayData.description
 			let temperatureString = String(format: "%.0f℃", dayData.temperature)
@@ -127,7 +126,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
                 data,response, error in
 				if let error = error {
 					dispatch_async(dispatch_get_main_queue() ) {
-						self.spinner.stopAnimating()
+                        self.spinner.stopAnimating()
 					}
 					print(error.localizedDescription)
 					return
