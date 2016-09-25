@@ -20,7 +20,7 @@ class WeatherModel {
 	var city:String = ""
 	var days:[DailyWeather] = []
 
-	let dateFormatter = NSDateFormatter()
+	let dateFormatter = DateFormatter()
 
 	func parseCity(response:[String: AnyObject]) {
 		if let city = response["city"] as? [String: AnyObject] {
@@ -31,33 +31,33 @@ class WeatherModel {
 	}
 
 	func dateFromToday(days:Int) -> String {
-		let dateComponent = NSDateComponents()
+		var dateComponent = DateComponents()
 		dateComponent.day = days
-		let calendar = NSCalendar.currentCalendar()
+		let calendar = Calendar.current
 
-		let date = calendar.dateByAddingComponents(dateComponent, toDate: NSDate(), options: NSCalendarOptions.init(rawValue: 0) )!
+		let date = (calendar as NSCalendar).date(byAdding: dateComponent, to: Date(), options: NSCalendar.Options.init(rawValue: 0) )!
 		switch days {
 		case 0,1:
-			dateFormatter.dateStyle = .ShortStyle
+			dateFormatter.dateStyle = .short
 			dateFormatter.doesRelativeDateFormatting = true
 		default:
 			dateFormatter.dateFormat = "EEEE"
 		}
-		return dateFormatter.stringFromDate(date)
+		return dateFormatter.string(from: date)
 	}
 
 
-	func parseData(data:NSData?) {
+	func parse(data:Data?) {
 		do {
 			guard let data = data else {
 				return
 			}
-			if let  response = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions(rawValue:0)) as? [String: AnyObject] {
+			if let  response = try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions(rawValue:0)) as? [String: AnyObject] {
 
-				self.parseCity(response)
+				self.parseCity(response:response)
 
 				if let list = response["list"] as? [[String:AnyObject]] {
-					for (index, element) in list.enumerate() {
+					for (index, element) in list.enumerated() {
 						var newDay = DailyWeather()
 						if let temp = element["temp"] as? [String:AnyObject] {
 							newDay.temperature = temp["day"] as! Double
@@ -68,7 +68,7 @@ class WeatherModel {
 								newDay.icon = weather["icon"] as! String
 							}
 						}
-						newDay.dateString = dateFromToday(index)
+						newDay.dateString = dateFromToday(days:index)
 						days.append(newDay)
 					}
 				}else{
