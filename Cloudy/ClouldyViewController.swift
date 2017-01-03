@@ -83,7 +83,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 				print(error.localizedDescription)
 			} else if let httpResponse = response as? HTTPURLResponse {
 				if httpResponse.statusCode == 200 {
-					self.weatherModel.parse(data:data!)
+					self.weatherModel.parse(data!)
 					DispatchQueue.main.async {
                         self.updateUI()
 					}

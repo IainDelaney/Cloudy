@@ -22,7 +22,7 @@ class WeatherModel {
 
 	let dateFormatter = DateFormatter()
 
-	func parseCity(response:[String: AnyObject]) {
+	func parseCity(_ response:[String: AnyObject]) {
 		if let city = response["city"] as? [String: AnyObject] {
 			self.city = city["name"] as! String
 		}else{
@@ -30,12 +30,12 @@ class WeatherModel {
 		}
 	}
 
-	func dateFromToday(days:Int) -> String {
+	func dateFromToday(_ days:Int) -> String {
 		var dateComponent = DateComponents()
 		dateComponent.day = days
 		let calendar = Calendar.current
 
-		let date = (calendar as NSCalendar).date(byAdding: dateComponent, to: Date(), options: NSCalendar.Options.init(rawValue: 0) )!
+        let date = calendar.date(byAdding: dateComponent, to: Date(), wrappingComponents:true )!
 		switch days {
 		case 0,1:
 			dateFormatter.dateStyle = .short
@@ -47,14 +47,14 @@ class WeatherModel {
 	}
 
 
-	func parse(data:Data?) {
+	func parse(_ data:Data?) {
 		do {
 			guard let data = data else {
 				return
 			}
 			if let  response = try JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions(rawValue:0)) as? [String: AnyObject] {
 
-				self.parseCity(response:response)
+				self.parseCity(response)
 
 				if let list = response["list"] as? [[String:AnyObject]] {
 					for (index, element) in list.enumerated() {
@@ -68,7 +68,7 @@ class WeatherModel {
 								newDay.icon = weather["icon"] as! String
 							}
 						}
-						newDay.dateString = dateFromToday(days:index)
+						newDay.dateString = dateFromToday(index)
 						days.append(newDay)
 					}
 				}else{
