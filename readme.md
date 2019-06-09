@@ -1,6 +1,9 @@
-#Cloudy App for iOS 9
+#Cloudy App for iOS 11
 Cloudy is a single-view app originally written in Swift 2.0 for iOS 9.x. Cloudy runs on the iPhone 6 and up in portrait mode, and the iPad in portrait and landscape mode.
+
 Cloudy has been updated to swift 4.2.
+
+Cloudy has been updated to swift 5.0.
 
 Cloudy needs location services to find your local weather, and retrieves weather information from [openweathermap.org](http://openweathermap.org).
 
