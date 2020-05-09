@@ -25,9 +25,6 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 	var dataTask: URLSessionDataTask?
 
 	var APIKey = Bundle.main.object(forInfoDictionaryKey: "APIKey") as! String
- 
-    var weatherModel = WeatherModel()
-	var iconNames = Set<String>()
 
 	var haveLocation = false
 
@@ -46,7 +43,6 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 
 	func startUI() {
 		haveLocation = false
-        iconNames.removeAll()
         spinner.startAnimating()
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.delegate = self
@@ -70,7 +66,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 		                        latestLocation.coordinate.longitude)
 
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast/daily?lat=\(latitudeString)&lon=\(longitudeString)&mode=json&units=metric&cnt=5&APPID=\(APIKey)")
+		let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=\(latitudeString)&lon=\(longitudeString)&mode=json&units=metric&cnt=5&APPID=\(APIKey)")
 
 		defaultSession.dataTask(with: url!, completionHandler: { data, response, error in
 			DispatchQueue.main.async {
@@ -83,9 +79,16 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 				print(error.localizedDescription)
 			} else if let httpResponse = response as? HTTPURLResponse {
 				if httpResponse.statusCode == 200 {
-					self.weatherModel.parse(data!)
-					DispatchQueue.main.async {
-                        self.updateUI()
+					if let data = data {
+						let decoder = JSONDecoder()
+						do {
+							let res = try decoder.decode(DataModel.self, from: data)
+							DispatchQueue.main.async {
+								self.updateUI(res)
+							}
+						} catch let error {
+							print(error)
+						}
 					}
 				}
 			}
@@ -101,25 +104,27 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 		present(alertController, animated: true, completion: nil)
 	}
 
-	func updateUI() {
-		self.cityLabel.text = "Weather for \(self.weatherModel.city)"
+	func updateUI(_ dataModel: DataModel) {
+		var iconNames = Set<String>()
+		let viewModel = ViewModel.init(dataModel)
+		self.cityLabel.text = "Weather for \(viewModel.city)"
 		for (index, view) in weatherDays.enumerated() {
 			let dayView = view.subviews[0] as? DayView
-			let dayData = self.weatherModel.days[index]
+			let dayData = viewModel.days[index]
 			dayView?.dayLabel.text = dayData.dateString
 			dayView?.forecastLabel.text = dayData.description
 			let temperatureString = String(format: "%.0f℃", dayData.temperature)
 			dayView?.temperatureLabel.text = temperatureString
 			dayView?.iconName = dayData.icon
-			self.iconNames.insert(dayData.icon)
+			iconNames.insert(dayData.icon)
 		}
 		spinner.stopAnimating()
-		loadIcons()
+		loadIcons(iconNames)
 	}
 	
-	func loadIcons() {
+	func loadIcons(_ iconNames:Set<String>) {
 
-		for iconName in self.iconNames {
+		for iconName in iconNames {
             let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
             let imageURL = URL(string: iconPath)
             defaultSession.dataTask(with: imageURL!, completionHandler: {
