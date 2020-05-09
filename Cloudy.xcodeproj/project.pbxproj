@@ -15,7 +15,8 @@
 		B9DDD3CA1CE2849400E441A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9DDD3C81CE2849400E441A8 /* Main.storyboard */; };
 		B9DDD3CC1CE2849400E441A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9DDD3CB1CE2849400E441A8 /* Assets.xcassets */; };
 		B9DDD3CF1CE2849400E441A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9DDD3CD1CE2849400E441A8 /* LaunchScreen.storyboard */; };
-		B9F34BA21CE2D587008303C3 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F34BA11CE2D587008303C3 /* WeatherModel.swift */; };
+		B9E8CD78246711D3009B5FD9 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E8CD77246711D3009B5FD9 /* DataModel.swift */; };
+		B9E8CD7A24671CFD009B5FD9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E8CD7924671CFD009B5FD9 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,8 @@
 		B9DDD3CB1CE2849400E441A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9DDD3CE1CE2849400E441A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9DDD3D01CE2849400E441A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B9F34BA11CE2D587008303C3 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		B9E8CD77246711D3009B5FD9 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		B9E8CD7924671CFD009B5FD9 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,8 @@
 				B9DDD3C41CE2849400E441A8 /* AppDelegate.swift */,
 				B9DDD3C61CE2849400E441A8 /* ClouldyViewController.swift */,
 				B9DDD3C81CE2849400E441A8 /* Main.storyboard */,
-				B9F34BA11CE2D587008303C3 /* WeatherModel.swift */,
+				B9E8CD77246711D3009B5FD9 /* DataModel.swift */,
+				B9E8CD7924671CFD009B5FD9 /* ViewModel.swift */,
 				B9CC04131CE4262200E542EF /* DayView.swift */,
 				B98F6FCA1CE4C386007960DD /* DayView.xib */,
 				B9CC04111CE40AAB00E542EF /* CloudView.swift */,
@@ -153,8 +156,9 @@
 				B9CC04121CE40AAB00E542EF /* CloudView.swift in Sources */,
 				B9CC04141CE4262200E542EF /* DayView.swift in Sources */,
 				B9DDD3C71CE2849400E441A8 /* ClouldyViewController.swift in Sources */,
-				B9F34BA21CE2D587008303C3 /* WeatherModel.swift in Sources */,
 				B9DDD3C51CE2849400E441A8 /* AppDelegate.swift in Sources */,
+				B9E8CD78246711D3009B5FD9 /* DataModel.swift in Sources */,
+				B9E8CD7A24671CFD009B5FD9 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
