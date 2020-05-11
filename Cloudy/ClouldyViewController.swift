@@ -125,7 +125,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 	func loadIcons(_ iconNames:Set<String>) {
 
 		for iconName in iconNames {
-            let iconPath = "http://openweathermap.org/img/w/\(iconName).png"
+            let iconPath = "https://openweathermap.org/img/w/\(iconName).png"
             let imageURL = URL(string: iconPath)
             defaultSession.dataTask(with: imageURL!, completionHandler: {
                 data,response, error in
