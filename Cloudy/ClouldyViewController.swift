@@ -11,7 +11,7 @@ import CoreLocation
 
 class CloudyViewController: UIViewController, CLLocationManagerDelegate, ViewModelDelegate {
 
-	var viewModel = ViewModel()
+	lazy var viewModel = ViewModel(with: self)
 
 	@IBOutlet weak var cityLabel: UILabel!
 
@@ -24,8 +24,6 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate, ViewMod
 	var haveLocation = false
 
 	override func viewDidLoad() {
-		viewModel.delegate = self
-		
 		for view in weatherDays {
 			let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DayView
 			dayView!.frame = view.bounds
@@ -48,9 +46,9 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate, ViewMod
 		locationManager.requestLocation()
 
     }
+
 	func locationManager(_ manager: CLLocationManager,
-	                     didUpdateLocations locations: [CLLocation])
-	{
+	                     didUpdateLocations locations: [CLLocation]) {
 		if haveLocation {
 			return
 		}
@@ -89,38 +87,15 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate, ViewMod
 			dayView?.iconName = dayData.icon
 			iconNames.insert(dayData.icon)
 		}
+		stopSpinner()
+		viewModel.loadIcons(iconNames)
+	}
+
+	func stopSpinner() {
 		spinner.stopAnimating()
-		loadIcons(iconNames)
 	}
 	
-	func loadIcons(_ iconNames:Set<String>) {
-
-		for iconName in iconNames {
-            let iconPath = "https://openweathermap.org/img/w/\(iconName).png"
-            let imageURL = URL(string: iconPath)
-			URLSession.shared.dataTask(with: imageURL!, completionHandler: {
-                data,response, error in
-				if let error = error {
-					DispatchQueue.main.async {
-                        self.spinner.stopAnimating()
-					}
-					print(error.localizedDescription)
-					return
-				}
-                guard let data = data else {
-					print("no data")
-                    return
-                }
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self.updateIcon(iconName,image:image)
-                    }
-                }
-            }).resume()
-        }
-	}
-
-	func updateIcon(_ iconName:String, image:UIImage){
+	func updateIcon(_ iconName:String, image:UIImage) {
 		for view in self.weatherDays {
 			if let dayView = view.subviews[0] as? DayView {
 				if dayView.iconName == iconName {

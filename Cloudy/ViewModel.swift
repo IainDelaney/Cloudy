@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct DailyWeather {
 	let temperature: Float
@@ -49,12 +50,18 @@ struct WeatherData {
 
 protocol ViewModelDelegate: class {
 	func updateUI(with weatherData:WeatherData)
+	func updateIcon(_ iconName:String, image:UIImage)
+	func stopSpinner()
 }
 
 class ViewModel {
 	var weatherData: WeatherData?
-	weak var delegate:ViewModelDelegate?
+	unowned var delegate:ViewModelDelegate
 
+	init( with delegate: ViewModelDelegate) {
+		self.delegate = delegate
+	}
+	
 	func loadWeather(latitude:String, longitude: String) {
 		let APIKey = Bundle.main.object(forInfoDictionaryKey: "APIKey") as! String
 		let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=\(latitude)&lon=\(longitude)&mode=json&units=metric&cnt=5&APPID=\(APIKey)")
@@ -69,7 +76,7 @@ class ViewModel {
 							let modelData = try decoder.decode(DataModel.self, from: data)
 							let weatherModel = WeatherData.init(modelData)
 							DispatchQueue.main.async {
-								self.delegate?.updateUI(with: weatherModel)
+								self.delegate.updateUI(with: weatherModel)
 							}
 						} catch let error {
 							print(error)
@@ -78,6 +85,33 @@ class ViewModel {
 				}
 			}
 		}).resume()
+	}
+
+	func loadIcons(_ iconNames:Set<String>) {
+
+		for iconName in iconNames {
+            let iconPath = "https://openweathermap.org/img/w/\(iconName).png"
+            let imageURL = URL(string: iconPath)
+			URLSession.shared.dataTask(with: imageURL!, completionHandler: {
+                data,response, error in
+				if let error = error {
+					DispatchQueue.main.async {
+						self.delegate.stopSpinner()
+					}
+					print(error.localizedDescription)
+					return
+				}
+                guard let data = data else {
+					print("no data")
+                    return
+                }
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+						self.delegate.updateIcon(iconName,image:image)
+                    }
+                }
+            }).resume()
+        }
 	}
 
 }
