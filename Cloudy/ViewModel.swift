@@ -35,7 +35,7 @@ struct DailyWeather {
 	}
 }
 
-struct ViewModel {
+struct WeatherData {
 	let city:String
 	var days:[DailyWeather]
 	init(_ dataModel: DataModel) {
@@ -45,4 +45,39 @@ struct ViewModel {
 			days.append(DailyWeather.init(model, index: index))
 		}
 	}
+}
+
+protocol ViewModelDelegate: class {
+	func updateUI(with weatherData:WeatherData)
+}
+
+class ViewModel {
+	var weatherData: WeatherData?
+	weak var delegate:ViewModelDelegate?
+
+	func loadWeather(latitude:String, longitude: String) {
+		let APIKey = Bundle.main.object(forInfoDictionaryKey: "APIKey") as! String
+		let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=\(latitude)&lon=\(longitude)&mode=json&units=metric&cnt=5&APPID=\(APIKey)")
+		URLSession.shared.dataTask(with: url!, completionHandler: { data, response, error in
+			if let error = error {
+				print(error.localizedDescription)
+			} else if let httpResponse = response as? HTTPURLResponse {
+				if httpResponse.statusCode == 200 {
+					if let data = data {
+						let decoder = JSONDecoder()
+						do {
+							let modelData = try decoder.decode(DataModel.self, from: data)
+							let weatherModel = WeatherData.init(modelData)
+							DispatchQueue.main.async {
+								self.delegate?.updateUI(with: weatherModel)
+							}
+						} catch let error {
+							print(error)
+						}
+					}
+				}
+			}
+		}).resume()
+	}
+
 }

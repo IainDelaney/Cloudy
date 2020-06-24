@@ -9,7 +9,9 @@
 import UIKit
 import CoreLocation
 
-class CloudyViewController: UIViewController, CLLocationManagerDelegate {
+class CloudyViewController: UIViewController, CLLocationManagerDelegate, ViewModelDelegate {
+
+	var viewModel = ViewModel()
 
 	@IBOutlet weak var cityLabel: UILabel!
 
@@ -17,18 +19,13 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
     
 	@IBOutlet weak var spinner: UIActivityIndicatorView!
 
-    
 	var locationManager: CLLocationManager = CLLocationManager()
-
-	let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
-
-	var dataTask: URLSessionDataTask?
-
-	var APIKey = Bundle.main.object(forInfoDictionaryKey: "APIKey") as! String
 
 	var haveLocation = false
 
 	override func viewDidLoad() {
+		viewModel.delegate = self
+		
 		for view in weatherDays {
 			let dayView = UINib(nibName: "DayView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? DayView
 			dayView!.frame = view.bounds
@@ -65,35 +62,10 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 		let longitudeString = String(format: "%.4f",
 		                        latestLocation.coordinate.longitude)
 
+		viewModel.loadWeather(latitude: latitudeString, longitude: longitudeString)
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=\(latitudeString)&lon=\(longitudeString)&mode=json&units=metric&cnt=5&APPID=\(APIKey)")
-
-		defaultSession.dataTask(with: url!, completionHandler: { data, response, error in
-			DispatchQueue.main.async {
-				UIApplication.shared.isNetworkActivityIndicatorVisible = false
-			}
-			if let error = error {
-				DispatchQueue.main.async {
-					self.spinner.stopAnimating()
-				}
-				print(error.localizedDescription)
-			} else if let httpResponse = response as? HTTPURLResponse {
-				if httpResponse.statusCode == 200 {
-					if let data = data {
-						let decoder = JSONDecoder()
-						do {
-							let res = try decoder.decode(DataModel.self, from: data)
-							DispatchQueue.main.async {
-								self.updateUI(res)
-							}
-						} catch let error {
-							print(error)
-						}
-					}
-				}
-			}
-		}).resume()
 	}
+
 
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		self.spinner.stopAnimating()
@@ -104,13 +76,12 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 		present(alertController, animated: true, completion: nil)
 	}
 
-	func updateUI(_ dataModel: DataModel) {
+	func updateUI(with weatherData:WeatherData) {
 		var iconNames = Set<String>()
-		let viewModel = ViewModel.init(dataModel)
-		self.cityLabel.text = "Weather for \(viewModel.city)"
+		self.cityLabel.text = "Weather for \(weatherData.city)"
 		for (index, view) in weatherDays.enumerated() {
 			let dayView = view.subviews[0] as? DayView
-			let dayData = viewModel.days[index]
+			let dayData = weatherData.days[index]
 			dayView?.dayLabel.text = dayData.dateString
 			dayView?.forecastLabel.text = dayData.description
 			let temperatureString = String(format: "%.0f℃", dayData.temperature)
@@ -127,7 +98,7 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate {
 		for iconName in iconNames {
             let iconPath = "https://openweathermap.org/img/w/\(iconName).png"
             let imageURL = URL(string: iconPath)
-            defaultSession.dataTask(with: imageURL!, completionHandler: {
+			URLSession.shared.dataTask(with: imageURL!, completionHandler: {
                 data,response, error in
 				if let error = error {
 					DispatchQueue.main.async {
