@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>APIKey</key>
-	<string>20f9bce4365af27c15ef97319c5e25a6</string>
+	<string></string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.weather</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
