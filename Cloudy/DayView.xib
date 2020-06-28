@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -25,23 +25,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9c-u8-NZS" customClass="CloudView" customModule="Cloudy" customModuleProvider="target">
                     <rect key="frame" x="16" y="0.0" width="240" height="151"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X8h-5R-vAc">
-                            <rect key="frame" x="45" y="29.5" width="150" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="150" id="0Le-0z-V4l"/>
-                                <constraint firstAttribute="height" constant="21" id="Orh-8y-GHL"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wca-FL-6X6">
-                            <rect key="frame" x="99" y="100.5" width="42" height="21"/>
+                            <rect key="frame" x="99" y="23" width="42" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="42" id="7fY-UR-huz"/>
                                 <constraint firstAttribute="height" constant="21" id="EJe-oQ-Muu"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -52,22 +42,26 @@
                                 <constraint firstAttribute="height" constant="50" id="sMz-pS-cK2"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X8h-5R-vAc">
+                            <rect key="frame" x="45" y="101" width="150" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="0Le-0z-V4l"/>
+                                <constraint firstAttribute="height" constant="21" id="Orh-8y-GHL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="cNE-KI-AFH" firstAttribute="top" secondItem="X8h-5R-vAc" secondAttribute="bottom" id="EeG-56-wZT"/>
                         <constraint firstItem="cNE-KI-AFH" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="KlV-em-EzS"/>
                         <constraint firstItem="cNE-KI-AFH" firstAttribute="centerY" secondItem="k9c-u8-NZS" secondAttribute="centerY" id="NCI-bJ-zOR"/>
                         <constraint firstItem="X8h-5R-vAc" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="W6H-DH-lZf"/>
-                        <constraint firstItem="wca-FL-6X6" firstAttribute="top" secondItem="cNE-KI-AFH" secondAttribute="bottom" id="eJ8-kV-ej7"/>
-                        <constraint firstItem="cNE-KI-AFH" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="qXW-YZ-y0r"/>
+                        <constraint firstItem="X8h-5R-vAc" firstAttribute="top" secondItem="cNE-KI-AFH" secondAttribute="bottom" constant="0.5" id="k9O-cy-GjM"/>
+                        <constraint firstItem="cNE-KI-AFH" firstAttribute="top" secondItem="wca-FL-6X6" secondAttribute="bottom" constant="6.5" id="rSf-Ku-T8n"/>
                         <constraint firstItem="wca-FL-6X6" firstAttribute="centerX" secondItem="k9c-u8-NZS" secondAttribute="centerX" id="uca-7g-Q6O"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="qXW-YZ-y0r"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
