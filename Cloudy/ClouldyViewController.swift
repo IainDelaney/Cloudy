@@ -39,10 +39,10 @@ class CloudyViewController: UIViewController, CLLocationManagerDelegate, ViewMod
 	func startUI() {
 		haveLocation = false
         spinner.startAnimating()
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+		locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+		locationManager.delegate = self
+		locationManager.requestWhenInUseAuthorization()
+		locationManager.startUpdatingLocation()
 		locationManager.requestLocation()
 
     }

@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 class CloudView: UIView {
 
-    override func draw(_ rect: CGRect) {
+	override func draw(_ rect: CGRect) {
 		//// PaintCode Trial Version
 		//// www.paintcodeapp.com
 		//// Color Declarations
@@ -55,5 +55,4 @@ class CloudView: UIView {
 		bezierPath.stroke()
 
 	}
-
 }
